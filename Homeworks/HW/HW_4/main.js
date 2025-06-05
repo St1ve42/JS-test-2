@@ -8,5 +8,5 @@ function exchange(sumUAH,currencyValues,exchangeCurrency){
 
 sum = +prompt(`Input the sum in UAH you want to convert`, `10000`)
 currency_convert = prompt(`Input the currency you want to convert to`, `USD`)
-value_convert = exchange(sum,[{currency:`USD`,value:25},{currency:`EUR`,value:42}],currency_convert)
-document.write(`<h2 style = "font-weight: normal">${sum} ${currency_convert} - ${value_convert} UAH</h2>`)
+value_convert = exchange(sum, [{currency:`USD`,value:25},{currency:`EUR`,value:42}], currency_convert)
+document.write(`<h2 style = "font-weight: normal">${sum} UAH - ${value_convert} ${currency_convert}</h2>`)
