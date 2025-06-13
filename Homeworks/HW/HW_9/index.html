@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .courses{
+            display: flex;
+            justify-content: space-evenly;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .main{
+            width: 600px;
+            height: 1000px;
+            background-color: #30d5c8;
+            border: 4px solid black;
+            /*box-shadow: 0px 10px 5px #888888;*/
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            padding-top: 20px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            margin: 10px;
+        }
+        .div-design{
+            background-color: white;
+            border: 4px solid black;
+        }
+        .title, .month-duration, .hour-duration, .module{
+            font-family: 'RobotoS', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .title{
+            width: 80%;
+            height: 40px;
+            font-weight: bold;
+        }
+        .duration{
+            width: 82%;
+            height: 40px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .month-duration{
+            width: 20%;
+            height: 100%;
+        }
+        .hour-duration{
+            width: 50%;
+            height: 100%;
+        }
+        .modules{
+            width: 82%;
+            height: 80%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            padding-top: 10px;
+            box-sizing: border-box;
+        }
+        .module{
+            width: 80%;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+<script>
+    let coursesArray = [
+        {
+            title: 'JavaScript Complex',
+            monthDuration: 5,
+            hourDuration: 909,
+            modules: ['html', 'css', 'js', 'mysql', 'mongodb', 'react', 'angular', 'aws', 'docker', 'git', 'node.js']
+        },
+        {
+            title: 'Java Complex',
+            monthDuration: 6,
+            hourDuration: 909,
+            modules: ['html',
+                'css',
+                'js',
+                'mysql',
+                'mongodb',
+                'angular',
+                'aws',
+                'docker',
+                'git',
+                'java core',
+                'java advanced']
+        },
+        {
+            title: 'Python Complex',
+            monthDuration: 6,
+            hourDuration: 909,
+            modules: ['html',
+                'css',
+                'js',
+                'mysql',
+                'mongodb',
+                'angular',
+                'aws',
+                'docker',
+                'python core',
+                'python advanced']
+        },
+        {
+            title: 'QA Complex',
+            monthDuration: 4,
+            hourDuration: 909,
+            modules: ['html', 'css', 'js', 'mysql', 'mongodb', 'git', 'QA/QC']
+        },
+        {
+            title: 'FullStack',
+            monthDuration: 7,
+            hourDuration: 909,
+            modules: ['html',
+                'css',
+                'js',
+                'mysql',
+                'mongodb',
+                'react',
+                'angular',
+                'aws',
+                'docker',
+                'git',
+                'node.js',
+                'python',
+                'java']
+        },
+        {
+            title: 'Frontend',
+            monthDuration: 4,
+            hourDuration: 909,
+            modules: ['html', 'css', 'js', 'mysql', 'mongodb', 'react', 'angular', 'aws', 'docker', 'git', 'sass']
+        }
+    ];
+    let createTag = (tag, className = undefined, parent = undefined, innerHTML = undefined) => {
+        let tagVar = document.createElement(tag);
+        if (className) {
+            if (!Array.isArray(className)) {
+                tagVar.classList.add(className)
+            }
+            else {
+                for (let element of className) {
+                    tagVar.classList.add(element)
+                }
+            }
+        }
+        if (parent) {
+            parent.appendChild(tagVar);
+        }
+        if (innerHTML) {
+            tagVar.innerHTML = innerHTML;
+        }
+        return tagVar
+    }
+    let courses = createTag('div', 'courses', document.body);
+    for (let coursesArrayElement of coursesArray) {
+        let mainDiv = createTag('div', 'main', courses);
+        let titleDiv = createTag('div', ['title', 'div-design'], mainDiv, coursesArrayElement.title);
+        let durationDiv = createTag('div', 'duration', mainDiv);
+        let monthDurationDiv = createTag('div', ['month-duration', 'div-design'], durationDiv, `${coursesArrayElement.monthDuration} місяців`);
+        let hourDurationDiv = createTag('div', ['hour-duration', 'div-design'], durationDiv, `${coursesArrayElement.hourDuration} годин`);
+        let modulesDiv = createTag('div', ['modules', 'div-design'], mainDiv);
+        for (let moduleElement of coursesArrayElement.modules) {
+            let module = createTag('div', ['module', 'div-design'], modulesDiv, moduleElement);
+        }
+    }
+</script>
+</body>
+</html>
