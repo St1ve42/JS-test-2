@@ -24,6 +24,11 @@ let outputUserInfo = (index) => {
     }
     div.appendChild(divBlock)
 }
+let deleteUserInfo = () => {
+    let div = document.getElementById('info')
+    div.children[div.children.length - 1].remove()
+}
+
 let prevBtn = document.getElementById('prev-btn')
 let nextBtn = document.getElementById('next-btn')
 window.addEventListener('load', e => {
@@ -44,7 +49,7 @@ nextBtn.addEventListener('click', e => {
 prevBtn.addEventListener('click', e => {
     let index = +JSON.parse(localStorage.getItem('index'));
     if(0 < index && index <= 90){
-        outputUserInfo(index - 10)
+        deleteUserInfo()
         localStorage.setItem('index', `${index - 10}`)
     }
     else{
