@@ -25,6 +25,8 @@ let outputUserInfo = (index) => {
     div.appendChild(divBlock)
 }
 let deleteUserInfo = () => {
+    let p = document.getElementById('text')
+    p.innerText = ``
     let div = document.getElementById('info')
     div.children[div.children.length - 1].remove()
 }
