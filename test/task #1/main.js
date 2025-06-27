@@ -81,6 +81,3 @@ btnRemove.addEventListener('click', e => {
     divOutput.lastChild.remove();
     localStorage.setItem('pairList', JSON.stringify([]));
 })
-//Запитатись стосовно пари ім'я-значення, а саме про їхню ідентичність та формат написання
-
-// console.log(+'іек')

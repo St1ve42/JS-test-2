@@ -47,6 +47,7 @@ input[name='add']{
 #lst-output{
     height: 250px;
     border: 1px solid black;
+    overflow: scroll;
 }
 .btns{
     height: 100px;
