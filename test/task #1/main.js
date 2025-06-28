@@ -49,12 +49,6 @@ btnAdd.addEventListener('click', e => {
         return;
     }
     let pair = value.split("=")
-    if(!isNaN(Number(pair[0]))){
-        isValidAdd = false;
-        inputAdd.setCustomValidity(`Not correct type of name. The name must contain at least one letter`)
-        inputAdd.reportValidity();
-        return;
-    }
     let pairList = JSON.parse(localStorage.getItem('pairList')) || []
     pairList.push({name: pair[0], value: pair[1]});
     output(pairList)
