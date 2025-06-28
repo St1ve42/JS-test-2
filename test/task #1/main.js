@@ -13,10 +13,7 @@ let output = (pairList) => {
 
 let sorting = (pairList, key) => {
     pairList.sort((a, b) => {
-        if(!isNaN(parseFloat(a[key])) && !isNaN(parseFloat(b[key]))){
-            return parseFloat(a[key]) - (parseFloat(b[key]));
-        }
-        else if (a[key].length !== b[key].length) {
+        if (a[key].length !== b[key].length) {
             return a[key].length - b[key].length;
         }
         return a[key].localeCompare(b[key], 'en')
@@ -52,15 +49,9 @@ btnAdd.addEventListener('click', e => {
         return;
     }
     let pair = value.split("=")
-    if(!isNaN(parseFloat(pair[0]))){
+    if(!isNaN(Number(pair[0]))){
         isValidAdd = false;
-        inputAdd.setCustomValidity(`Not correct type of name. The name must contain only letters`)
-        inputAdd.reportValidity();
-        return;
-    }
-    if(isNaN(Number(pair[1]))){
-        isValidAdd = false;
-        inputAdd.setCustomValidity(`Not correct type of value. The name must contain only digits`)
+        inputAdd.setCustomValidity(`Not correct type of name. The name must contain at least one letter`)
         inputAdd.reportValidity();
         return;
     }
