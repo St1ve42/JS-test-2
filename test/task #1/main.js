@@ -16,7 +16,7 @@ let sorting = (pairList, key) => {
         if(!isNaN(parseFloat(a[key])) && !isNaN(parseFloat(b[key]))){
             return parseFloat(a[key]) - (parseFloat(b[key]));
         }
-        else if (a[key].length !== b[key].length && isNaN(parseFloat(a[key])) && isNaN(parseFloat(b[key]))) {
+        else if (a[key].length !== b[key].length) {
             return a[key].length - b[key].length;
         }
         return a[key].localeCompare(b[key], 'en')
@@ -52,10 +52,19 @@ btnAdd.addEventListener('click', e => {
         return;
     }
     let pair = value.split("=")
-    let pairList = JSON.parse(localStorage.getItem('pairList')) || []
-    if(pairList.find(item => item['name'] === pair[0] && item['value'] === pair[1])){
+    if(!isNaN(parseFloat(pair[0]))){
+        isValidAdd = false;
+        inputAdd.setCustomValidity(`Not correct type of name. The name must contain only letters`)
+        inputAdd.reportValidity();
         return;
     }
+    if(isNaN(Number(pair[1]))){
+        isValidAdd = false;
+        inputAdd.setCustomValidity(`Not correct type of value. The name must contain only digits`)
+        inputAdd.reportValidity();
+        return;
+    }
+    let pairList = JSON.parse(localStorage.getItem('pairList')) || []
     pairList.push({name: pair[0], value: pair[1]});
     output(pairList)
     localStorage.setItem('pairList', JSON.stringify(pairList));
