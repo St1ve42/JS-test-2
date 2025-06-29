@@ -13,8 +13,11 @@ let output = (pairList) => {
 
 let sorting = (pairList, key) => {
     pairList.sort((a, b) => {
-        if (a[key].length !== b[key].length) {
+        if (a[key].length !== b[key].length && isNaN(Number(a[key])) && isNaN(Number(b[key]))){
             return a[key].length - b[key].length;
+        }
+        else if(!isNaN(Number(a[key])) && !isNaN(Number(b[key]))){
+            return Number(a[key]) - Number(b[key]);
         }
         return a[key].localeCompare(b[key], 'en')
     });
