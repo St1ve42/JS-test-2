@@ -20,7 +20,7 @@ fetch('https://jsonplaceholder.typicode.com/users').then(res => res.json()).then
             li.innerHTML = `${arrKey}: ${item[arrKey]}`;
             ul.appendChild(li);
         }
-        btn.innerHTML = `Check user's details`
+        btn.innerHTML = `Check detailed information`
         a.appendChild(btn);
         divUser.appendChild(ul);
         divUser.appendChild(a);

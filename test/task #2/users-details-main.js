@@ -50,7 +50,7 @@ postBtn.addEventListener('click', (e) => {
             a.target = `_blank`;
             let postInfoBtn = document.createElement('button');
             postInfoBtn.classList.add('post-info-btn');
-            postInfoBtn.innerHTML = `detail information`
+            postInfoBtn.innerHTML = `Check detailed information`
             div.appendChild(p);
             a.appendChild(postInfoBtn);
             div.appendChild(a);
