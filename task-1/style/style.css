@@ -1,0 +1,79 @@
+body{
+    background: #5d87b9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+form{
+    background: white;
+    width: 500px;
+    height: 450px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    padding-left: 20px;
+}
+h3{
+    font-family: sans-serif;
+}
+label{
+    display: block;
+    font-family: sans-serif;
+    color: rgba(114,125,128,255);
+    font-size: 12px;
+}
+.pair div{
+    width: 73.5%;
+    display: flex;
+    justify-content: space-between;
+}
+input[name='name-value']{
+    width: 81.5%;
+    border: 1px solid black;
+}
+input[name='add']{
+    width: 40px;
+}
+.pair-lst{
+    width: 86%;
+    display: flex;
+    justify-content: space-between;
+}
+.lst{
+    width: 70%;
+}
+#lst-output{
+    height: 250px;
+    border: 1px solid black;
+    overflow: scroll;
+}
+.selected-pair{
+    background: #b3d4fc;
+}
+.deleted-pair{
+    background: #ffffff;
+}
+li{
+    cursor: pointer;
+}
+.btns{
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+.btns input{
+    width: 100px;
+}
+.btns > input{
+    width: 50px;
+}
+.btns div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
