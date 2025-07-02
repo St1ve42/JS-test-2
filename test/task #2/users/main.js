@@ -1,5 +1,5 @@
 let url = (window.location.protocol + "//" + window.location.host + window.location.pathname + window.location.search).split('/')
-url.pop()
+url.splice((url.length)-2, 2)
 let urlUpdated = url.join('/')
 fetch('https://jsonplaceholder.typicode.com/users').then(res => res.json()).then(users => {
     let divMain = document.createElement('div');
@@ -9,7 +9,7 @@ fetch('https://jsonplaceholder.typicode.com/users').then(res => res.json()).then
         divUser.classList.add('user');
         let ul = document.createElement('ul');
         let a = document.createElement('a');
-        let newURL = new URL(`${urlUpdated}/users-details.html`);
+        let newURL = new URL(`${urlUpdated}/users-details/users-details.html`);
         newURL.searchParams.set('userID', item.id)
         a.href = newURL.toString();
         a.target = `_blank`;

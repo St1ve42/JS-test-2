@@ -1,19 +1,3 @@
-let createList = (obj, elementToAppend) => {
-    let ul = document.createElement('ul');
-    for (let key in obj) {
-        if(typeof obj[key] !== 'object') {
-            let li = document.createElement('li');
-            li.innerHTML = `${key}: ${obj[key]}`;
-            ul.appendChild(li);
-        }
-        else{
-            ul.appendChild(createList(obj[key],ul))
-        }
-    }
-    elementToAppend.appendChild(ul);
-    return ul;
-}
-
 let url = window.location.protocol + "//" + window.location.host + window.location.pathname + window.location.search
 let postID = new URL(url).searchParams.get('postID');
 let post = fetch(`https://jsonplaceholder.typicode.com/posts/${postID}`).then(res => res.json()).then((post) => {

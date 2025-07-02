@@ -1,22 +1,6 @@
-let createList = (obj, elementToAppend) => {
-    let ul = document.createElement('ul');
-    for (let key in obj) {
-        if(typeof obj[key] !== 'object') {
-            let li = document.createElement('li');
-            li.innerHTML = `${key}: ${obj[key]}`;
-            ul.appendChild(li);
-        }
-        else{
-            ul.appendChild(createList(obj[key],ul))
-        }
-    }
-    elementToAppend.appendChild(ul);
-    return ul;
-}
-
 let url = (window.location.protocol + "//" + window.location.host + window.location.pathname + window.location.search).split('/')
 let userID = new URL(url.join('/')).searchParams.get('userID');
-url.pop()
+url.splice((url.length)-2, 2)
 let urlUpdated = url.join('/')
 let postBtn = document.createElement('button');
 postBtn.classList.add('post-btn');
@@ -44,7 +28,7 @@ postBtn.addEventListener('click', (e) => {
             let p = document.createElement('p');
             p.innerHTML = `${postElement.title}`;
             let a = document.createElement('a');
-            let newURL = new URL(`${urlUpdated}/post-details.html${window.location.search}`);
+            let newURL = new URL(`${urlUpdated}/post-details/post-details.html${window.location.search}`);
             newURL.searchParams.set('postID', postElement.id)
             a.href = newURL.toString();
             a.target = `_blank`;

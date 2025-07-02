@@ -49,6 +49,15 @@ input[name='add']{
     border: 1px solid black;
     overflow: scroll;
 }
+.selected-pair{
+    background: #b3d4fc;
+}
+.deleted-pair{
+    background: #ffffff;
+}
+li{
+    cursor: pointer;
+}
 .btns{
     height: 100px;
     display: flex;

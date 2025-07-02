@@ -1,16 +1,43 @@
 let output = (pairList) => {
     let ul = document.createElement('ul');
-    for (const pairListElement of pairList) {
-        let li = document.createElement("li")
-        li.innerHTML = `${pairListElement['name']}=${pairListElement['value']}`;
-        ul.append(li)
-    }
-    if (divOutput.children.length !== 0) {
-        divOutput.lastChild.remove()
-    }
-    divOutput.appendChild(ul)
-}
+    let selectedPairListIDs = JSON.parse(localStorage.getItem('selectedPairListID')) || [];
 
+    for (let i = 0; i < pairList.length; i++) {
+        let pairListElement = pairList[i];
+        let li = document.createElement("li");
+        const liId = `li-${pairListElement.name}-${pairListElement.value}`;
+        li.setAttribute('id', liId);
+        li.innerHTML = `${pairListElement['name']}=${pairListElement['value']}`;
+
+        if (selectedPairListIDs.includes(liId)) {
+            li.classList.add('selected-pair');
+            li.classList.remove('deleted-pair');
+        } else {
+            li.classList.remove('selected-pair', 'deleted-pair');
+        }
+
+        li.addEventListener('click', e => {
+            e.preventDefault();
+            let selectedPairListID = JSON.parse(localStorage.getItem('selectedPairListID')) || [];
+            if (li.classList.contains('selected-pair')) {
+                li.classList.remove('selected-pair');
+                li.classList.add('deleted-pair');
+                selectedPairListID.splice(selectedPairListID.indexOf(liId), 1);
+            } else {
+                li.classList.remove('deleted-pair');
+                li.classList.add('selected-pair');
+                if (!selectedPairListID.includes(liId)) {
+                    selectedPairListID.push(liId);
+                }
+            }
+            localStorage.setItem('selectedPairListID', JSON.stringify(selectedPairListID));
+        });
+
+        ul.append(li);
+    }
+    divOutput.innerHTML = '';
+    divOutput.appendChild(ul);
+}
 let sorting = (pairList, key) => {
     pairList.sort((a, b) => {
         if (a[key].length !== b[key].length && isNaN(Number(a[key])) && isNaN(Number(b[key]))){
@@ -31,10 +58,9 @@ let inputAdd = document.forms[0]['name-value']
 let isValidAdd = true;
 let divOutput = document.getElementById('lst-output')
 window.addEventListener('load', e => {
-    let pairList = JSON.parse(localStorage.getItem('pairList'))
-    if(pairList){
-        output(pairList)
-    }
+    localStorage.removeItem('selectedPairListID');
+    let pairList = JSON.parse(localStorage.getItem('pairList')) || []
+    output(pairList)
 })
 inputAdd.addEventListener('input', e => {
     if (!isValidAdd) {
@@ -47,7 +73,7 @@ btnAdd.addEventListener('click', e => {
     let value = inputAdd.value.replace(/\s+/g, '');
     if(!value.match(/^\w+=\w+$/g)) {
         isValidAdd = false;
-        inputAdd.setCustomValidity(`Not correct form data. It must be presented as <name>=<value>`)
+        inputAdd.setCustomValidity(`Not correct form data. It must be presented as <name>=<value>\n<name> and <value> must contain only alphanumeric characters.`);
         inputAdd.reportValidity();
         return;
     }
@@ -55,7 +81,9 @@ btnAdd.addEventListener('click', e => {
     let pairList = JSON.parse(localStorage.getItem('pairList')) || []
     pairList.push({name: pair[0], value: pair[1]});
     output(pairList)
+    inputAdd.value = '';
     localStorage.setItem('pairList', JSON.stringify(pairList));
+    localStorage.setItem('selectedPairListID', JSON.stringify([]))
 })
 btnSortByName.addEventListener('click', e => {
     e.preventDefault();
@@ -75,6 +103,20 @@ btnSortByValue.addEventListener('click', e => {
 })
 btnRemove.addEventListener('click', e => {
     e.preventDefault();
-    divOutput.lastChild.remove();
-    localStorage.setItem('pairList', JSON.stringify([]));
+    let pairList = JSON.parse(localStorage.getItem('pairList')) || []
+    let selectedPairList = JSON.parse(localStorage.getItem('selectedPairListID')) || []
+    let selectedPairListValues = selectedPairList.reduce((accum, value) => {
+        let pair = document.getElementById(value).innerText.split('=')
+        accum.push(JSON.stringify({name: pair[0], value: pair[1]}))
+        return accum
+    }, [])
+    let updatedPairList = pairList.filter(value => {
+        return !selectedPairListValues.includes(JSON.stringify(value))
+    })
+    selectedPairList.forEach(value => {
+        document.getElementById(value).remove()
+    })
+    localStorage.setItem('pairList', JSON.stringify(updatedPairList));
+    localStorage.setItem('selectedPairListID', JSON.stringify([]));
 })
+
